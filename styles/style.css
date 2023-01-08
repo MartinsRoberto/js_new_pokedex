@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  background-color: #fefefe;
+  background-image: url('https://i.pinimg.com/originals/98/c1/5a/98c15a449a1166ec23f5c9f1f63995dd.png');
+}
+
+.header{
+  background-color: #dc3545;
+}
+
+.header .brand{
+  font-size: 40px;
+  color: white;
+  text-decoration: none;
+  padding: 20px 0px;
+  display: block;
+  text-align: center;
+}
+.container {
+  width: 80%;
+  max-width: 1100px;
+  margin: auto;
+  background-color: #fefefe;
+}
+
+.table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  margin: 50px 0px;
+}
+
+.table thead {
+  font-weight: 400;
+  background-color: #dc3545;
+  font-weight: bold;
+  color: white;
+}
+
+.table th {
+  padding: 10px;
+}
+
+.table tbody tr:hover{
+  background-color: #E7E9EB;
+}
+
+.table td {
+  border-bottom: 2px solid #eee;
+  height: 60px;
+  cursor: pointer;
+}
+
+.table .img {
+  background-position: center;
+  background-size: 90%;
+  background-repeat: no-repeat;
+}
+
+.table td:nth-child(3){
+  text-transform: capitalize;
+}
+
+.table td:nth-child(5) span{
+  border-radius: 6px;
+  padding: 1px 0px;
+  text-transform: capitalize;
+  display: block;
+  width: 60px;
+  margin: 8px auto;
+}
