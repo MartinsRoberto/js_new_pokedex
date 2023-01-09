@@ -12,7 +12,7 @@ const brand = document.querySelector('.brand')
 brand.addEventListener('click', () => {
   const container = document.querySelector('.container')
   container.innerHTML = `
-  <table class="table">
+  <table class="table sortable">
     <thead>
       <tr>
         <th>IMG</th>
@@ -114,11 +114,14 @@ async function pokeInfo(number) {
   const id = Number(number.querySelector('td:nth-child(2)').innerText)
   const pokemon = await getPokemon(id)
 
-  const totalStats = pokemon.stats[0].base_stat + pokemon.stats[1].base_stat + pokemon.stats[2].base_stat + pokemon.stats[3].base_stat + pokemon.stats[4].base_stat + pokemon.stats[5].base_stat
-
   const poke_info = document.createElement('div')
   poke_info.setAttribute('class', 'poke-info')
 
+  poke_info.innerHTML += `
+    <div class="img">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png"/>
+    </div>
+  `
   const base_info = baseInfo(pokemon)
   poke_info.innerHTML += base_info
 
@@ -160,10 +163,11 @@ function baseInfo(pokemon){
   if(pokemon.types.length == 2){
     return `
       <div class="base-info">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png" />    
-        <p class="id">#${pokemon.id}</p>
-        <p class="name">${pokemon.name}</p>
+        <h3>Base Info</h3>
+        <p class="id">National Nº: #${pokemon.id}</p>
+        <p class="name">Name: ${pokemon.name}</p>
         <p class="types">
+          Types: 
           <span class="${pokemon.types[0].type.name}">${pokemon.types[0].type.name}</span>
           <span class="${pokemon.types[1].type.name}">${pokemon.types[1].type.name}</span>
         </p>
@@ -173,9 +177,9 @@ function baseInfo(pokemon){
   else{
     return `
       <div class="base-info">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png" />    
-        <p class="id">#${pokemon.id}</p>
-        <p class="name">${pokemon.name}</p>
+      <h3>Base Info</h3>
+      <p class="id">National Nº: #${pokemon.id}</p>
+      <p class="name">Name: ${pokemon.name}</p>
         <p class="types">
           <span class="${pokemon.types[0].type.name}">${pokemon.types[0].type.name}</span>
         </p>
@@ -188,27 +192,33 @@ function moreInfo(pokemon){
   if(pokemon.abilities.length == 3){
     return `
     <div class="more-info">
+      <h3>More Info</h3>
       <p>Abilities: ${pokemon.abilities[0].ability.name} / ${pokemon.abilities[1].ability.name} / ${pokemon.abilities[2].ability.name}</p>
-      <p>Height: ${pokemon.height}</p>
-      <p>Weight: ${pokemon.weight}</p>
+      <p>Height: ${pokemon.height/10} m</p>
+      <p>Weight: ${pokemon.weight/10} kg</p>
+      <p>Experience: ${pokemon.base_experience} xp</p>
     </div>
     `
   }
   else if(pokemon.abilities.length == 2){
     return `
     <div class="more-info">
+      <h3>More Info</h3>
       <p>Abilities: ${pokemon.abilities[0].ability.name} / ${pokemon.abilities[1].ability.name}</p>
-      <p>Height: ${pokemon.height}</p>
-      <p>Weight: ${pokemon.weight}</p>
+      <p>Height: ${pokemon.height/10} m</p>
+      <p>Weight: ${pokemon.weight/10} kg</p>
+      <p>Experience: ${pokemon.base_experience} xp</p>
     </div>
     `
   }
   else{
     return `
     <div class="more-info">
+      <h3>More Info</h3>
       <p>Abilities: ${pokemon.abilities[0].ability.name}</p>
-      <p>Height: ${pokemon.height}</p>
-      <p>Weight: ${pokemon.weight}</p>
+      <p>Height: ${pokemon.height/10} m</p>
+      <p>Weight: ${pokemon.weight/10} kg</p>
+      <p>Experience: ${pokemon.base_experience} xp</p>
     </div>
     `
   }
