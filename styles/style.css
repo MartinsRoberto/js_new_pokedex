@@ -10,6 +10,7 @@ body {
   min-height: 100vh;
   background-color: #fefefe;
   background-image: url('https://i.pinimg.com/originals/98/c1/5a/98c15a449a1166ec23f5c9f1f63995dd.png');
+  overflow-x: hidden;
 }
 
 .header{
@@ -21,7 +22,7 @@ body {
 }
 
 .header .brand{
-  font-size: 40px;
+  font-size: 2em;
   color: white;
   text-decoration: none;
   padding: 20px 0px;
@@ -29,11 +30,60 @@ body {
   text-align: center;
   cursor: pointer;
 }
+
+.filter{
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.input-search{
+  display: flex;
+}
+
+.input-search input, .input-search button{
+  font-size: 1.5em;
+  border: none;
+  padding: 6px;
+}
+
+.input-search input{
+  width: 200px;
+}
+.input-search input:focus{
+  outline: none;
+}
+
+.input-search button{
+  background-color: #dc3545;
+  cursor: pointer;
+  color: white;
+}
+
+.input-search button:hover{
+  background-color: #b02a37;
+}
+
+.filter select{
+  font-size: 1.5em;
+  padding: 6px;
+  border: none;
+}
+
+.filter select:focus{
+  outline: none;
+}
+
 .container {
   width: 90%;
   max-width: 1100px;
   margin: auto;
-  background-color: #fefefe;
+  background-color: transparent;
 }
 
 .table {
@@ -41,6 +91,7 @@ body {
   text-align: center;
   border-collapse: collapse;
   margin: 50px 0px;
+  background-color: rgb(255, 255, 255);
 }
 
 .table thead {
@@ -71,7 +122,8 @@ body {
 
 .table .img {
   background-position: center;
-  background-size: 90%;
+  background-size: 80%;
+  max-width: 70px;
   background-repeat: no-repeat;
 }
 
@@ -89,7 +141,9 @@ body {
 }
 
 .poke-info{
+  background-color: #fff;
   margin: 50px auto;
+  max-width: 800px;
   padding: 20px;
   display: grid;
   grid-template-areas: 'a b' 'a c' 'd d';
@@ -102,7 +156,7 @@ body {
 }
 
 .poke-info img{
-  margin-top: -70px;
+  margin-top: -50px;
   margin-bottom: 2em;
   max-width: 80%;
 }
@@ -199,6 +253,7 @@ body {
   }
 
   .poke-info{
+    text-align: center;
     grid-template-areas: 'a a' 'b c' 'd d';
   }
 }
@@ -223,3 +278,4 @@ body {
     display: none;
   }
 }
+

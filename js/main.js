@@ -1,37 +1,110 @@
+const brand = document.querySelector('.brand')
+const container = document.querySelector('.container')
+const tableStructure = `
+  <table class="table sortable">
+  <thead>
+    <tr>
+      <th>IMG</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Types</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+  </table>
+`
 
-const fetchPokemon = async () => {
-  for (let i = 1; i < 152; i++) {
-    const pokemon = await getPokemon(i)
-    createCard(pokemon)
+const fetchPokemon = async (name, type, generation) => {
+  loading(true)
+  if (name) {
+    for (i = 1; i <= 809; i++) {
+      const pokemon = await getPokemon(i)
+      if (pokemon.name.includes(name)) {
+        createCard(pokemon)
+      }
+    }
+    sort()
+    loading(false)
+  }
+  else if(type){
+    for (i = 1; i <= 809; i++) {
+      const pokemon = await getPokemon(i)
+      if(pokemon.types.length == 2){
+        if (pokemon.types[0].type.name.includes(type) || pokemon.types[1].type.name.includes(type)) {
+          createCard(pokemon)
+        }
+      }
+      else{
+        if (pokemon.types[0].type.name.includes(type)) {
+          createCard(pokemon)
+        }
+      }
+    }
+    sort()
+    loading(false)
+  }
+  else if (generation) {
+    let first = 1
+    let last = 151
+
+    if (generation == 'kanto') {
+      first = 1
+      last = 151
+    }
+    else if (generation == 'johto') {
+      first = 152
+      last = 251
+    }
+    else if (generation == 'hoenn') {
+      first = 252
+      last = 386
+    }
+    else if (generation == 'sinnoh') {
+      first = 387
+      last = 493
+    }
+    else if (generation == 'unova') {
+      first = 494
+      last = 649
+    }
+    else if (generation == 'kalos') {
+      first = 650
+      last = 721
+    }
+    else if (generation == 'alola') {
+      first = 722
+      last = 809
+    }
+
+    for (let i = first; i <= last; i++) {
+      const pokemon = await getPokemon(i)
+      createCard(pokemon)
+    }
+    sort()
+    loading(false)
+  }
+  else {
+    for (let i = 1; i < 152; i++) {
+      const pokemon = await getPokemon(i)
+      createCard(pokemon)
+    }
+    sort()
+    loading(false)
   }
 }
 
-fetchPokemon()
 
-const brand = document.querySelector('.brand')
+
 brand.addEventListener('click', () => {
-  const container = document.querySelector('.container')
-  container.innerHTML = `
-  <table class="table sortable">
-    <thead>
-      <tr>
-        <th>IMG</th>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Types</th>
-        <th>Total</th>
-        <th>HP</th>
-        <th>Attack</th>
-        <th>Defense</th>
-        <th>Sp. Atk</th>
-        <th>Sp. Def</th>
-        <th>Speed</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-  `
+  container.innerHTML = tableStructure
   fetchPokemon()
 })
 
@@ -131,11 +204,9 @@ async function pokeInfo(number) {
   const poke_stats = pokeStats(pokemon)
   poke_info.innerHTML += poke_stats
 
-  const container = document.querySelector('.container')
   container.innerHTML = ""
   container.appendChild(poke_info)
 }
-
 
 function paint(a) {
   if (a >= 150) {
@@ -159,8 +230,8 @@ function paint(a) {
 
 }
 
-function baseInfo(pokemon){
-  if(pokemon.types.length == 2){
+function baseInfo(pokemon) {
+  if (pokemon.types.length == 2) {
     return `
       <div class="base-info">
         <h3>Base Info</h3>
@@ -174,7 +245,7 @@ function baseInfo(pokemon){
       </div>
     `
   }
-  else{
+  else {
     return `
       <div class="base-info">
       <h3>Base Info</h3>
@@ -188,41 +259,41 @@ function baseInfo(pokemon){
   }
 }
 
-function moreInfo(pokemon){
-  if(pokemon.abilities.length == 3){
+function moreInfo(pokemon) {
+  if (pokemon.abilities.length == 3) {
     return `
     <div class="more-info">
       <h3>More Info</h3>
       <p>Abilities: ${pokemon.abilities[0].ability.name} / ${pokemon.abilities[1].ability.name} / ${pokemon.abilities[2].ability.name}</p>
-      <p>Height: ${pokemon.height/10} m</p>
-      <p>Weight: ${pokemon.weight/10} kg</p>
+      <p>Height: ${pokemon.height / 10} m</p>
+      <p>Weight: ${pokemon.weight / 10} kg</p>
       <p>Experience: ${pokemon.base_experience} xp</p>
     </div>
     `
   }
-  else if(pokemon.abilities.length == 2){
+  else if (pokemon.abilities.length == 2) {
     return `
     <div class="more-info">
       <h3>More Info</h3>
       <p>Abilities: ${pokemon.abilities[0].ability.name} / ${pokemon.abilities[1].ability.name}</p>
-      <p>Height: ${pokemon.height/10} m</p>
-      <p>Weight: ${pokemon.weight/10} kg</p>
+      <p>Height: ${pokemon.height / 10} m</p>
+      <p>Weight: ${pokemon.weight / 10} kg</p>
       <p>Experience: ${pokemon.base_experience} xp</p>
     </div>
     `
   }
-  else{
+  else {
     return `
     <div class="more-info">
       <h3>More Info</h3>
       <p>Abilities: ${pokemon.abilities[0].ability.name}</p>
-      <p>Height: ${pokemon.height/10} m</p>
-      <p>Weight: ${pokemon.weight/10} kg</p>
+      <p>Height: ${pokemon.height / 10} m</p>
+      <p>Weight: ${pokemon.weight / 10} kg</p>
       <p>Experience: ${pokemon.base_experience} xp</p>
     </div>
     `
   }
-  
+
 }
 
 function pokeStats(pokemon) {
@@ -292,4 +363,15 @@ function pokeStats(pokemon) {
       <div class="stats-max">${Math.floor((pokemon.stats[5].base_stat * 2 + 36 + 63) * 1.1)}</div>
     </div>
   </div>`
+}
+
+function loading(value){
+  if(value){
+    container.style.display = 'none'
+    document.querySelector('.loading').style.display = 'flex'
+  }
+  else{
+    container.style.display = 'block'
+    document.querySelector('.loading').style.display = 'none'
+  }
 }

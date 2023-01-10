@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +9,56 @@
 
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/colors.css">
+  <link rel="stylesheet" href="styles/loading.css">
 </head>
+
 <body>
   <header class="header">
     <h1 class="brand">Pokedex Database</h1>
   </header>
+
+  <div class="filter">
+    <div class="input-search">
+      <input type="text" placeholder="pokemon">
+      <button>Search</button>
+    </div>
+
+    <div class="filter-generation">
+      <select name="generation" id="generation">
+        <option value="kanto">Kanto</option>
+        <option value="johto">Johto</option>
+        <option value="hoenn">Hoenn</option>
+        <option value="sinnoh">Sinnoh</option>
+        <option value="unova">Unova</option>
+        <option value="kalos">Kalos</option>
+        <option value="alola">Alola</option>
+      </select>
+    </div>
+
+    <div class="filter-type">
+      <select name="type" id="type">
+        <option value="bug">Bug</option>
+        <option value="dark">Dark</option>
+        <option value="dragon">Dragon</option>
+        <option value="electric">Electric</option>
+        <option value="fairy">Fairy</option>
+        <option value="fighting">Fighting</option>
+        <option value="fire">Fire</option>
+        <option value="flying">Flying</option>
+        <option value="ghost">Ghost</option>
+        <option value="grass">Grass</option>
+        <option value="ground">Ground</option>
+        <option value="ice">Ice</option>
+        <option value="normal">Normal</option>
+        <option value="poison">Poison</option>
+        <option value="psychic">Psychic</option>
+        <option value="rock">Rock</option>
+        <option value="steel">Steel</option>
+        <option value="water">Water</option>
+      </select>
+    </div>
+
+  </div>
 
   <div class="container">
     <table class="table sortable">
@@ -35,7 +81,14 @@
       </tbody>
     </table>
   </div>
+
+  <div class="loading">
+    Catching pokemon...
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  </div>
   <script src="js/main.js"></script>
   <script src="js/sort.js"></script>
+  <script src="js/filter.js"></script>
 </body>
+
 </html>
